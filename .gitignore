@@ -1,3 +1,10 @@
+# executable binaries
+./main
+
+# images
+*.ppm
+*.png
+*.jpg
 
 # Created by https://www.gitignore.io/api/emacs,c
 # Edit at https://www.gitignore.io/?templates=emacs,c

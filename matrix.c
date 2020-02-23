@@ -26,7 +26,7 @@ void print_matrix(struct matrix *m) {
   printf("%d R x %d / %d C\n",m->rows,m->lastcol,m->cols);
   for( row = 0; row < m->rows; row++ ){
     for( col = 0; col < m->lastcol; col++ ){
-      printf("%07lf ",m->m[col][row]);
+      printf("%7lf ",m->m[col][row]);
     }
     printf("\n");
   }
@@ -38,6 +38,14 @@ Inputs:  struct matrix *m <-- assumes m is a square matrix
 turns m in to an identity matrix
 */
 void ident(struct matrix *m) {
+  if(m->cols < m->rows) grow_matrix(m,m->rows);
+  int row,col;
+  for( col = 0; col < m->rows; col++ ){
+    for( row = 0; row < m->rows; row++ ){
+      m->m[col][row] = (col == row ? 1 : 0);
+    }
+  }
+  m->lastcol = m->rows;
 }
 
 

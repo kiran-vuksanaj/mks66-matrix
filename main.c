@@ -13,6 +13,6 @@ int main() {
   struct matrix *edges;
 
   edges = new_matrix(4, 4);
-
+  
   free_matrix( edges );
 }  

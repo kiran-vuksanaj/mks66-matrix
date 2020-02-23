@@ -1,5 +1,5 @@
 # executable binaries
-./main
+main
 
 # images
 *.ppm

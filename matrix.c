@@ -23,7 +23,7 @@ the template in the top comment
 */
 void print_matrix(struct matrix *m) {
   int row,col;
-  printf("%d R x %d / %d C\n",m->rows,m->lastcol,m->cols);
+  // printf("%d R x %d / %d C\n",m->rows,m->lastcol,m->cols);
   for( row = 0; row < m->rows; row++ ){
     for( col = 0; col < m->lastcol; col++ ){
       // printf(" m[ %d ][ %d ]\n",row,col);

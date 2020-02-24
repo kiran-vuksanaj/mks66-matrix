@@ -51,10 +51,10 @@ void draw_lines( struct matrix * points, screen s, color c) {
   int i;
   for( i = 0; i < points->lastcol; i+=2 ){
     draw_line(
-	      points->m[i][0],
-	      points->m[i][1],
-	      points->m[i+1][0],
-	      points->m[i+1][1],
+	      points->m[0][i],
+	      points->m[1][i],
+	      points->m[0][i+1],
+	      points->m[1][i+1],
 	      s,c
 	      );
   }

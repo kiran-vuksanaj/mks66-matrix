@@ -7,7 +7,8 @@
 #include "draw.h"
 #include "matrix.h"
 
-#include "time.h"
+#include <time.h>
+#include <math.h>
 
 int main() {
 
@@ -65,13 +66,36 @@ int main() {
   /* declarations, matrix initializations */
   screen s;
   color c;
-  struct matrix *blue = new_matrix(4,5);
-  struct matrix *green = new_matrix(4,2);
   struct matrix *white = new_matrix(4,4);
 
+  double theta;
   /* adding edges */
 
-  add_edge(white,50,50,0,150,150,0);
+  for( theta = 0; theta < M_PI / 2; theta += M_PI / 3600 ){
+    add_edge(white,
+	     50,50,0,
+	     50 + cos(theta) * 50, 50 + sin(theta) * 50, 0
+	     );
+  }
+  for( theta = M_PI ; theta < M_PI*1.5; theta += M_PI / 3600 ){
+    add_edge(white,
+	     450,450,0,
+	     450 + cos(theta) * 50, 450 + sin(theta) * 50, 0
+	     );
+  }
+  for( theta = M_PI / 2 ; theta < M_PI; theta += M_PI / 3600 ){
+    add_edge(white,
+	     450,50,0,
+	     450 + cos(theta) * 50, 50 + sin(theta) * 50, 0
+	     );
+  }
+  for( theta = M_PI * 1.5 ; theta < M_PI * 2; theta += M_PI / 3600 ){
+    add_edge(white,
+	     50,450,0,
+	     50 + cos(theta) * 50, 450 + sin(theta) * 50, 0
+	     );
+  }
+  
 
   /* setting colors and drawing for each matrix */
   clear_screen(s);
@@ -81,17 +105,11 @@ int main() {
   c.blue = 255;
   draw_lines(white,s,c);
 
-  c.red = 0;
-  c.blue = 0;
-  draw_lines(green,s,c);
+  save_ppm_ascii(s,"frame.ppm");
+  save_extension(s,"frame.png");
+  
+  printf("image file generated: ./frame.png\n");
 
-  c.blue = 255;
-  c.green = 0;
-  draw_lines(blue,s,c);
-  
-  save_ppm_ascii(s,"chaos.ppm");
-  save_extension(s,"chaos.png");
-  
-  printf("image file generated: ./chaos.png\n");
+  free_matrix(white);
   
 }  

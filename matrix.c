@@ -26,6 +26,7 @@ void print_matrix(struct matrix *m) {
   printf("%d R x %d / %d C\n",m->rows,m->lastcol,m->cols);
   for( row = 0; row < m->rows; row++ ){
     for( col = 0; col < m->lastcol; col++ ){
+      // printf(" m[ %d ][ %d ]\n",row,col);
       printf("%7lf ",m->m[row][col]);
     }
     printf("\n");
@@ -57,20 +58,21 @@ multiply a by b, modifying b to be the product
 a*b -> b
 */
 void matrix_mult(struct matrix *a, struct matrix *b) {
-  struct matrix *out = new_matrix(a->rows,b->lastcol);
+  struct matrix *out = new_matrix(a->rows,b->cols);
   out->lastcol = b->lastcol;
-  int row,col,i,sum;
+  int row,col,i;
+  double sum;
   for( row = 0; row < a->rows; row++ ){
     for( col = 0; col < b->lastcol; col++ ){
       sum = 0;
       for( i = 0; i < a->rows; i++ ){
 	sum += a->m[row][i] * b->m[i][col];
       }
+      // printf(" out[ %d ][ %d ] = %d\n",row,col,sum);
       out->m[row][col] = sum;
     }
   }
-  free_matrix(b);
-  b = out;
+  copy_matrix(out,b);
 }
 
 
@@ -135,7 +137,6 @@ Reallocates the memory for m->m such that it now has
 newcols number of collumns
 ====================*/
 void grow_matrix(struct matrix *m, int newcols) {
-  printf("growing matrix, %d newcols\n",newcols);
   int i;
   for (i=0;i<m->rows;i++) {
       m->m[i] = realloc(m->m[i],newcols*sizeof(double));

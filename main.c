@@ -22,10 +22,19 @@ int main() {
   printf("\nadd (7,7,7),(-3,0,2.4)\n");
   add_edge(edges,7,7,7,-3,0,2.4);
   print_matrix(edges);
+
   /*==== TESTING ident() ====*/
-  transform = new_matrix(4, 4);
-  ident(edges);
+  printf("\n==== testing ident() ====\n");
+  transform = new_matrix(4, 2);
+  ident(transform);
+  print_matrix(transform);
+
+  /*==== TESTING matrix_mult() ====*/
+  printf("\n==== testing matrix_mult() ====\n");
+  printf("ident * edges (should yield the same)\n");
+  matrix_mult(transform,edges);
   print_matrix(edges);
   
   free_matrix( edges );
+  free_matrix( transform );
 }  

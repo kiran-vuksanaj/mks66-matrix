@@ -11,8 +11,19 @@ int main() {
 
   screen s;
   struct matrix *edges;
-
-  edges = new_matrix(4, 4);
+  struct matrix *transform;
+  
+  /*==== TESTING add_edge() ====*/
+  printf("==== testing add_edge() ====\n");
+  printf("new matrix 4x3 (test growing as well)\nadd (4,2,3),(9,4,4)\n");
+  edges = new_matrix(4,3);
+  add_edge(edges,4,2,3,9,4,4);
+  print_matrix(edges);
+  printf("\nadd (7,7,7),(-3,0,2.4)\n");
+  add_edge(edges,7,7,7,-3,0,2.4);
+  print_matrix(edges);
+  /*==== TESTING ident() ====*/
+  transform = new_matrix(4, 4);
   ident(edges);
   print_matrix(edges);
   
